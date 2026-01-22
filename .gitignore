@@ -1,0 +1,10 @@
+/client/package-lock.json
+/client/node_modules
+/client/dist
+
+/.idea
+
+/server/node_modules
+/server/package-lock.json
+/server/favourites.json
+/server/nodemon.json
