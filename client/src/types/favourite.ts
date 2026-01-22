@@ -1,10 +1,4 @@
-
-export type favourite = {
-    data: {
-        favourites: {
-            id: number,
-            link: string
-        }[];
-    }
+export type Favourite = {
+    id: number,
+    link: string
 }
-

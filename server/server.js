@@ -14,73 +14,92 @@ app.use(bodyParser.json())
 
 app.post("/create", (req, res) => {
     const link = req.body.link;
-    const favourites = require("./favourites.json");
-    var id= 0;
-    if(favourites.length > 0){
-        id = favourites[favourites.length -1].id + 1;
-    }
 
-    const newDatas = {
-        'id': id,
-        'link': link
-    }
-    favourites.push(newDatas)
+    fs.readFile('./favourites.json', 'utf8', (err, json) => {
+        if (err) throw err;
+        let favourites = JSON.parse(json);
 
-    let code = 200
-    fs.writeFile('./favourites.json', JSON.stringify(favourites), (err) => {
-        if (err){
-            code = 500
+        var id= 0;
+        if(favourites.length > 0){
+            id = favourites[favourites.length -1].id + 1;
         }
-    })
 
-    res.status(code);
+        const newDatas = {
+            'id': id,
+            'link': link
+        }
+        favourites.push(newDatas)
+
+        let code = 200
+        fs.writeFile('./favourites.json', JSON.stringify(favourites), (err) => {
+            if (err){
+                code = 500
+            }
+        })
+
+        res.status(code);
+    });
 })
 
 app.post("/delete", (req, res) => {
     const id = req.body.id;
-    const favourites = require("./favourites.json");
-    let newDatas = []
-    for (const favIndex in favourites) {
-        const fav = favourites[favIndex];
-        if(fav.id !== parseInt(id)){
-            newDatas.push(fav)
-        }
-    }
 
-    let code = 200
-    fs.writeFile('./favourites.json', JSON.stringify(newDatas), (err) => {
-        if (err){
-            code = 500;
-        }
-    })
+    fs.readFile('./favourites.json', 'utf8', (err, json) => {
+        if (err) throw err;
+        let favourites = JSON.parse(json);
 
-    res.status(code);
+        let newDatas = []
+        for (const favIndex in favourites) {
+            const fav = favourites[favIndex];
+            if(fav.id !== parseInt(id)){
+                newDatas.push(fav)
+            }
+        }
+
+        let code = 200
+        fs.writeFile('./favourites.json', JSON.stringify(newDatas), (err) => {
+            if (err){
+                code = 500;
+            }
+        })
+
+        res.status(code);
+    });
 })
 
 app.get("/favourites", (req, res) => {
-    const favourites = require("./favourites.json");
-    res.json({favourites: favourites});
+    fs.readFile('./favourites.json', 'utf8', (err, json) => {
+        if (err) throw err;
+        favourites = JSON.parse(json);
+        res.json({favourites: favourites});
+    });
 })
 
 app.get("/favourites/:id", (req, res) => {
     const id = req.params.id;
-    const favourites = require("./favourites.json");
-    let toSend = "";
-    let found = false;
 
-    for (const favIndex in favourites){
-        if(favIndex[favIndex].id === parseInt(id)){
-            toSend = favourites[favIndex];
-            found = true;
-            break;
+    fs.readFile('./favourites.json', 'utf8', (err, json) => {
+        if (err) return res.status(500);
+        const favourites = JSON.parse(json);
+        res.json({favourites: favourites});
+
+        let toSend = "";
+        let found = false;
+
+        for (const favIndex in favourites){
+            if(favourites[favIndex].id === parseInt(id)){
+                toSend = favourites[favIndex];
+                found = true;
+                break;
+            }
         }
-    }
 
-    if(!found){
-        res.status(404)
-    } else {
-        res.json({favourites: toSend});
-    }
+        if(!found){
+            res.status(404)
+        } else {
+            res.json({favourites: toSend});
+        }
+    });
 })
 
 app.listen(8080, () => {
