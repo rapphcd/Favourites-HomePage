@@ -7,14 +7,19 @@ export const getFavourites = async () : Promise<Favourite[]> => {
 }
 
 export const deleteFavourite = async (id : number) => {
-    await axios.post("http://localhost:8080/delete", {
-        id: id
+    await axios.delete(`http://localhost:8080/delete/${id}`);
+}
+
+export const createFavourite = async (link : string, name: string) => {
+    await axios.post("http://localhost:8080/create", {
+        link: link,
+        name: name,
     });
 }
 
-export const createFavourite = async (link : string) => {
-    await axios.post("http://localhost:8080/create", {
-        link: link
+export const updateFavourite = async (id: number, updated : Favourite) => {
+    await axios.post(`http://localhost:8080/update/${id}`, {
+        updated: updated,
     });
 }
 

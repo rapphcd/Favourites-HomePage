@@ -1,4 +1,5 @@
 export type Favourite = {
     id: number,
-    link: string
+    link: string,
+    name: string,
 }

@@ -14,6 +14,7 @@ app.use(bodyParser.json())
 
 app.post("/create", (req, res) => {
     const link = req.body.link;
+    const name = req.body.name;
 
     fs.readFile('./favourites.json', 'utf8', (err, json) => {
         if (err) throw err;
@@ -26,7 +27,8 @@ app.post("/create", (req, res) => {
 
         const newDatas = {
             'id': id,
-            'link': link
+            'link': link,
+            'name': name
         }
         favourites.push(newDatas)
 
@@ -41,8 +43,41 @@ app.post("/create", (req, res) => {
     });
 })
 
-app.post("/delete", (req, res) => {
-    const id = req.body.id;
+app.put('/update/:id', (req,res) => {
+    const updated = req.body.updated;
+    const id = req.params.id;
+
+    fs.readFile('./favourites.json', 'utf8', (err, json) => {
+        if (err) throw err;
+        let favourites = JSON.parse(json);
+
+        let newFavourites = [];
+        let found = false;
+
+        for (const favIndex in favourites){
+            if(favourites[favIndex].id !== parseInt(id)){
+                newFavourites.push(favourites[favIndex])
+            }
+        }
+
+        if(!found){
+            res.status(404)
+        } else {
+            let code = 200;
+            newFavourites.push(updated);
+            fs.writeFile('./favourites.json', JSON.stringify(newFavourites), (err) => {
+                if (err){
+                    code = 500;
+                }
+            })
+            res.status(code);
+        }
+
+    });
+})
+
+app.delete("/delete/:id", (req, res) => {
+    const id = req.params.id;
 
     fs.readFile('./favourites.json', 'utf8', (err, json) => {
         if (err) throw err;
@@ -81,7 +116,6 @@ app.get("/favourites/:id", (req, res) => {
     fs.readFile('./favourites.json', 'utf8', (err, json) => {
         if (err) return res.status(500);
         const favourites = JSON.parse(json);
-        res.json({favourites: favourites});
 
         let toSend = "";
         let found = false;

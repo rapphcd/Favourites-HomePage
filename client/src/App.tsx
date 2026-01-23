@@ -4,9 +4,9 @@ import Favourites from "./components/Favourites.tsx";
 function App() {
 
   return (
-    <>
-      <Favourites></Favourites>
-    </>
+      <main className={"flex flex-col w-full h-full items-start justify-center"}>
+          <Favourites></Favourites>
+      </main>
   )
 }
 
