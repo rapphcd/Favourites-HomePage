@@ -1,7 +1,8 @@
-import {getFavourites, deleteFavourite, updateFavourite} from "../api/favourites.ts";
+import {getFavourites, deleteFavourite, updateFavourite, createFavourite} from "../api/favourites.ts";
 import {useEffect, useState} from "react";
 import type {Favourite} from "../types/favourite.ts";
 import FavouriteCard from "./FavouriteCard.tsx";
+import AddButton from "./AddButton.tsx";
 
 function Favourites() {
     const [favourites, setFavourites] = useState<Favourite[]>([]);
@@ -37,6 +38,10 @@ function Favourites() {
         }
     }
 
+    function createFav(newFav : { name: string, link: string}) : Promise<Favourite> {
+        return createFavourite(newFav.name, newFav.link);
+    }
+
     return (
         <div className={"flex flex-col w-[40%] h-[90%] justify-around bg-zinc-800 items-center rounded-2xl gradient my-4 mx-2"} >
             <div className={"flex flex-col justify-around w-[90%] h-full"}>
@@ -45,6 +50,7 @@ function Favourites() {
                         <FavouriteCard key={fav.id} fav={fav} onEdit={editFav} onDelete={deleteFav}></FavouriteCard>
                     ))
                 }
+                <AddButton favourites={favourites} setFavourites={setFavourites} onCreate={createFav}></AddButton>
             </div>
         </div>
     )

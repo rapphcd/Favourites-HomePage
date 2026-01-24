@@ -39,7 +39,7 @@ app.post("/create", (req, res) => {
             }
         })
 
-        res.status(code);
+        res.status(code).json(newDatas);
     });
 })
 
