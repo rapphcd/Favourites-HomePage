@@ -1,0 +1,61 @@
+import type {Favourite} from "../types/favourite.ts";
+import {useState} from "react";
+
+interface Props {
+    fav: Favourite,
+    onEdit: (id: number, newFav: Favourite) => void,
+    onDelete: (id: number) => void
+}
+
+function FavouriteCard({fav, onEdit = f => f, onDelete = f => f}: Props) {
+    const [visibility, setVisibility] = useState(false);
+
+    const [name, setName] = useState(fav.name);
+    const [link, setLink] = useState(fav.link)
+
+    function handleSub(e : any){
+        e.preventDefault();
+        const {inputname,inputlink} = e.target.elements
+        if( inputname.value == "" || inputlink.value == "") {
+            return;
+        }
+        const favor = {
+            id: fav.id,
+            name: inputname.value,
+            link: inputlink.value
+        };
+        setName(inputname.value);
+        setLink(inputlink.value);
+        onEdit(fav.id, favor)
+        setVisibility(false)
+    }
+
+    return (
+        <div>
+            {
+                visibility ? (
+                    <div className={"w-full h-full absolute flex justify-center items-center top-0 left-0"}>
+                        <div className={"bg-black/30 w-full h-full absolute flex justify-center items-center top-0 left-0"} onClick={()=>setVisibility(false)}></div>
+                        <form id={"editFav"} onSubmit={handleSub} className={"flex flex-col justify-around items-center transition ease-in-out animate-modalopen size-[50%] bg-zinc-800 rounded-4xl z-10 outline outline-white/20"}>
+                            <input type="hidden" name="id" value={fav.id}/>
+                            <input type="text" name="inputname" id="inputname" required={true} defaultValue={name}/>
+                            <input type="text" name="inputlink" id="inputlink" required={true} defaultValue={link}/>
+                            <button type="submit">Confirm</button>
+                        </form>
+                    </div>
+                ) : null
+            }
+            <div key={fav.id} className={"bg-zinc-900 rounded-xl flex items-center justify-between overflow-hidden"}>
+                <a href={link} className={"p-4 w-[85%]"}>{name}</a>
+                <div className={"w-fit flex flex-row"}>
+                    <button className={"p-4 hover:bg-zinc-700"} onClick={() => {setVisibility(true)}}>EDIT</button>
+                    <button className={"p-4 hover:bg-zinc-700"} onClick={() => {
+                        onDelete(fav.id)
+                    }}>DEL</button>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default FavouriteCard;

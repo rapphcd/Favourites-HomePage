@@ -57,6 +57,8 @@ app.put('/update/:id', (req,res) => {
         for (const favIndex in favourites){
             if(favourites[favIndex].id !== parseInt(id)){
                 newFavourites.push(favourites[favIndex])
+            } else {
+                found = true
             }
         }
 

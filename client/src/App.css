@@ -3,3 +3,18 @@
 * {
     color: white;
 }
+
+@theme {
+    --animate-modalopen: modalopen 0.2s ease-in-out;
+    @keyframes modalopen {
+        0%{
+            transform: scale(0.90);
+        }
+        100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.01);
+        }
+    }
+}
