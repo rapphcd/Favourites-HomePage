@@ -13,7 +13,7 @@ function Clock(){
     }, []);
 
     return (
-        <div className={"bg-zinc-800 p-5 rounded-2xl outline outline-white/10 text-7xl pointer-events-none select-none"}>
+        <div className={"bg-zinc-800 p-5 rounded-2xl outline outline-white/10 text-7xl cursor-default hover:scale-[100.5%] hover:shadow-md select-none transition duration-75"}>
             {clock}
         </div>
     )

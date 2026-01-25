@@ -55,7 +55,7 @@ function AddButton({favourites ,setFavourites = f => f, onCreate} : Props){
                 ) : null
             }
             <div className={" flex items-center justify-center"}>
-                <div className={"w-[20%] bg-zinc-900 hover:bg-zinc-950/60 rounded-full flex items-center justify-center overflow-hidden p-2 cursor-default transition"} onClick={()=>{setVisibility(true)}}>
+                <div className={"w-[20%] bg-zinc-900 hover:bg-zinc-950/60 rounded-full flex items-center justify-center overflow-hidden p-2 cursor-default transition select-none"} onClick={()=>{setVisibility(true)}}>
                     +
                 </div>
             </div>
