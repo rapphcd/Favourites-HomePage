@@ -43,13 +43,15 @@ function Favourites() {
     }
 
     return (
-        <div className={"flex flex-col w-[40%] h-[90%] justify-around bg-zinc-800 items-center rounded-2xl gradient my-4 mx-2"} >
-            <div className={"flex flex-col justify-around w-[90%] h-full"}>
-                {
-                    favourites.map((fav: Favourite) => (
-                        <FavouriteCard key={fav.id} fav={fav} onEdit={editFav} onDelete={deleteFav}></FavouriteCard>
-                    ))
-                }
+        <div className={"flex flex-col w-[30%] h-full justify-around bg-zinc-800 outline outline-white/10 items-center rounded-2xl gradient m-4"} >
+            <div className={"flex flex-col justify-around w-full h-full p-2"}>
+                <div className={"flex flex-col justify-start h-full gap-2"}>
+                    {
+                        favourites.map((fav: Favourite) => (
+                            <FavouriteCard key={fav.id} fav={fav} onEdit={editFav} onDelete={deleteFav}></FavouriteCard>
+                        ))
+                    }
+                </div>
                 <AddButton favourites={favourites} setFavourites={setFavourites} onCreate={createFav}></AddButton>
             </div>
         </div>

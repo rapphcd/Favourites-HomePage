@@ -36,20 +36,20 @@ function FavouriteCard({fav, onEdit = f => f, onDelete = f => f}: Props) {
                 visibility ? (
                     <div className={"w-full h-full absolute flex justify-center items-center top-0 left-0"}>
                         <div className={"bg-black/30 w-full h-full absolute flex justify-center items-center top-0 left-0"} onClick={()=>setVisibility(false)}></div>
-                        <form id={"editFav"} onSubmit={handleSub} className={"flex flex-col justify-around items-center transition ease-in-out animate-modalopen size-[50%] bg-zinc-800 rounded-4xl z-10 outline outline-white/20"}>
+                        <form id={"editFav"} onSubmit={handleSub} className={"flex flex-col justify-around items-center transition ease-in-out animate-modalopen size-[30%] bg-zinc-800 rounded-4xl z-10 outline outline-white/20"}>
                             <input type="hidden" name="id" value={fav.id}/>
-                            <input type="text" name="inputname" id="inputname" required={true} defaultValue={name}/>
-                            <input type="text" name="inputlink" id="inputlink" required={true} defaultValue={link}/>
+                            <input type="text" name="inputname" id="inputname" className={"bg-zinc-900 p-2 w-[90%] rounded-2xl focus:border-none focus:outline-1 focus:outline-white/50"} autoComplete={"off"}  required={true} defaultValue={name}/>
+                            <input type="text" name="inputlink" id="inputlink" className={"bg-zinc-900 p-2 w-[90%] rounded-2xl focus:border-none focus:outline-1 focus:outline-white/50"} autoComplete={"off"}  required={true} defaultValue={link}/>
                             <button type="submit">Confirm</button>
                         </form>
                     </div>
                 ) : null
             }
-            <div key={fav.id} className={"bg-zinc-900 rounded-xl flex items-center justify-between overflow-hidden"}>
-                <a href={link} className={"p-4 w-[85%]"}>{name}</a>
-                <div className={"w-fit flex flex-row"}>
-                    <button className={"p-4 hover:bg-zinc-700"} onClick={() => {setVisibility(true)}}>EDIT</button>
-                    <button className={"p-4 hover:bg-zinc-700"} onClick={() => {
+            <div key={fav.id} className={"bg-zinc-900 transition rounded-xl hover:bg-zinc-950/60 flex items-center justify-between overflow-hidden"}>
+                <a href={link} className={"p-4 w-[85%] cursor-default"}>{name}</a>
+                <div className={"w-fit flex  flex-row"}>
+                    <button className={"p-4 hover:bg-zinc-700 transition"} onClick={() => {setVisibility(true)}}>EDIT</button>
+                    <button className={"p-4 hover:bg-zinc-700 transition"} onClick={() => {
                         onDelete(fav.id)
                     }}>DEL</button>
                 </div>
