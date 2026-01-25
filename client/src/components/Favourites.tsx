@@ -43,7 +43,7 @@ function Favourites() {
     }
 
     return (
-        <div className={"flex flex-col w-[30%] h-full justify-around bg-zinc-800 outline outline-white/10 items-center rounded-2xl gradient m-4"} >
+        <div className={"flex flex-col w-[30%] h-full max-h-[95%] justify-around bg-zinc-800 outline outline-white/10 items-center rounded-2xl m-4"} >
             <div className={"flex flex-col justify-around w-full h-full p-2"}>
                 <div className={"flex flex-col justify-start h-full gap-2"}>
                     {
