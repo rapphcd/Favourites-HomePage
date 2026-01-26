@@ -19,7 +19,7 @@ function MeteoWidget() {
             try {
                 const apimeteo = await getMeteo(1.9086066, 47.9027336)
 
-                if(meteo.success){
+                if(apimeteo.success){
                     setMeteo(apimeteo)
                 }
             } catch (e) {
