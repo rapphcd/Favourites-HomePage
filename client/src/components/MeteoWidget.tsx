@@ -4,6 +4,8 @@ import type {MeteoData} from "../types/meteodata.ts";
 
 
 function MeteoWidget() {
+    const [longitude, setLongitude] = useState(-73.935242);
+    const [latitude, setLatitude] = useState(40.730610);
     const [meteo, setMeteo] = useState<MeteoData>({
         city: "",
         country: "",
@@ -15,11 +17,18 @@ function MeteoWidget() {
     });
 
     useEffect(() => {
+        const success = (position: GeolocationPosition) => {
+            setLongitude(position.coords.longitude)
+            setLatitude(position.coords.latitude)
+        }
+        navigator.geolocation.getCurrentPosition(success, () => {
+            console.log('error')
+        })
         const showMeteo = async () => {
             try {
-                const apimeteo = await getMeteo(1.9086066, 47.9027336)
+                const apimeteo = await getMeteo(longitude, latitude)
 
-                if(apimeteo.success){
+                if (apimeteo.success) {
                     setMeteo(apimeteo)
                 }
             } catch (e) {
@@ -27,16 +36,21 @@ function MeteoWidget() {
             }
         }
         showMeteo()
-    }, []);
+    }, [latitude, longitude]);
 
     return (
-        <div className={"bg-zinc-800 p-5 rounded-2xl outline outline-white/10 text-xl cursor-default hover:scale-[100.5%] hover:shadow-md select-none transition duration-75"}>
-            {meteo?.temp}<br/>
-            {meteo?.city}<br/>
-            {meteo?.country}<br/>
-            {meteo?.icon}<br/>
-            {meteo?.main}<br/>
-            {meteo?.description}<br/>
+        <div
+            className={" flex flex-col items-center bg-zinc-800 p-5 rounded-2xl outline outline-white/10 text-xl cursor-default hover:scale-[100.5%] hover:shadow-md select-none transition duration-75"}>
+            <p className="text-sky-500 text-4xl">
+                {meteo?.temp}°C
+            </p>
+            <p className="">
+                {meteo?.main}
+            </p>
+            <img src={`https://openweathermap.org/img/wn/${meteo?.icon}@2x.png`} alt={"aa"}/>
+            <p className="text-zinc-500 text-sm">
+                {meteo?.city}, {meteo?.country}
+            </p>
         </div>
     )
 }
