@@ -43,7 +43,7 @@ function Favourites() {
     }
 
     return (
-        <div className={"flex flex-col w-[40%] h-full max-h-[95%] justify-around bg-zinc-800 border border-white/5 items-center rounded-2xl m-4 mt-0 transition duration-75"} >
+        <div className={"flex flex-col w-[40%] h-full max-h-[95%] justify-around bg-zinc-800 border border-zinc-700/80 items-center rounded-2xl m-4 mt-0 transition duration-75"} >
             <div className={"flex flex-col justify-around w-full h-full p-2"}>
                 <div className={"flex flex-col justify-start h-full gap-2"}>
                     {
