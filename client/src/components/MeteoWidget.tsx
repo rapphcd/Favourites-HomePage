@@ -38,16 +38,33 @@ function MeteoWidget() {
         showMeteo()
     }, [latitude, longitude]);
 
+    const getTempColor = (temp : number) => {
+        if( temp <= 10 ){
+            return "text-sky-400"
+        }
+        if( temp >= 30 ){
+            return "text-red-500"
+        }
+        if( temp >= 25 ){
+            return "text-orange-400"
+        }
+
+    }
+
     return (
         <div
             className={" flex flex-col items-center bg-zinc-800 p-5 rounded-2xl outline outline-white/10 text-xl cursor-default hover:scale-[100.5%] hover:shadow-md select-none transition duration-75"}>
-            <p className="text-sky-500 text-4xl">
-                {meteo?.temp}°C
-            </p>
-            <p className="">
-                {meteo?.main}
-            </p>
-            <img src={`https://openweathermap.org/img/wn/${meteo?.icon}@2x.png`} alt={"aa"}/>
+            <div className={"flex flex-row"}>
+                <div className={"flex flex-col"}>
+                    <p className={`${getTempColor(Number(meteo?.temp))} text-4xl`}>
+                        {meteo?.temp}°C
+                    </p>
+                    <p className="">
+                        {meteo?.main}
+                    </p>
+                </div>
+                <img className={"pointer-events-none"} src={`https://openweathermap.org/img/wn/${meteo?.icon}@2x.png`} alt={"aa"}/>
+            </div>
             <p className="text-zinc-500 text-sm">
                 {meteo?.city}, {meteo?.country}
             </p>
