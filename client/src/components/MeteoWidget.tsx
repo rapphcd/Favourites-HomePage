@@ -10,7 +10,7 @@ function MeteoWidget() {
         city: "",
         country: "",
         description: "",
-        icon: "",
+        icon: "01d",
         main: "",
         success: false,
         temp: ""

@@ -36,7 +36,7 @@ function FavouriteCard({fav, onEdit = f => f, onDelete = f => f}: Props) {
                 visibility ? (
                     <div className={"w-full h-full absolute flex justify-center items-center top-0 left-0"}>
                         <div className={"bg-black/30 w-full h-full absolute flex justify-center items-center top-0 left-0"} onClick={()=>setVisibility(false)}></div>
-                        <form id={"editFav"} onSubmit={handleSub} className={"flex flex-col justify-around items-center transition ease-in-out animate-modalopen size-[30%] bg-zinc-800 rounded-4xl z-10 outline outline-white/20"}>
+                        <form id={"editFav"} onSubmit={handleSub} className={"flex flex-col justify-around items-center transition ease-in-out animate-modalopen size-[30%] bg-zinc-800 rounded-4xl z-10 border border-zinc-700/80"}>
                             <input type="hidden" name="id" value={fav.id}/>
                             <input type="text" name="inputname" id="inputname" className={"bg-zinc-900 p-2 w-[90%] rounded-2xl focus:border-none focus:outline-1 focus:outline-white/50"} autoComplete={"off"}  required={true} defaultValue={name}/>
                             <input type="text" name="inputlink" id="inputlink" className={"bg-zinc-900 p-2 w-[90%] rounded-2xl focus:border-none focus:outline-1 focus:outline-white/50"} autoComplete={"off"}  required={true} defaultValue={link}/>
