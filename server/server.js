@@ -1,5 +1,7 @@
 const express = require("express");
+const fileUpload = require("express-fileupload")
 const cors = require('cors');
+const path = require('path');
 const fs = require("fs");
 const bodyParser = require("body-parser");
 
@@ -136,6 +138,19 @@ app.get("/favourites/:id", (req, res) => {
             res.json({favourites: toSend});
         }
     });
+})
+
+app.post("/background/upload", fileUpload({ createParentPath: true }) , (req, res) => {
+    if(!req.files) return res.status(500);
+    const file = req.files.file
+
+    const fpath = path.join(__dirname, 'uploaded', 'background', file.name)
+
+    file.mv(fpath, (err) => {
+        if(err) return res.status(500)
+    })
+
+    res.status(200);
 })
 
 app.listen(8080, () => {
