@@ -11,3 +11,5 @@
 /server/background.json
 /server/uploaded/background/*
 /server/uploaded/icons/*
+
+!/server/uploaded/background/bg.jpg
