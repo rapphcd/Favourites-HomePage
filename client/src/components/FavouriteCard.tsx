@@ -50,9 +50,9 @@ function FavouriteCard({fav, onEdit = f => f, onDelete = f => f}: Props) {
             <div key={fav.id} className={"bg-zinc-900 transition rounded-xl hover:bg-zinc-950/60 flex items-center justify-between overflow-hidden"}>
                 <LinkIcon link={link}></LinkIcon>
                 <a href={link} className={"py-4 w-[85%] cursor-default"}>{name}</a>
-                <div className={"w-fit flex  flex-row"}>
-                    <button className={"p-4 hover:bg-zinc-700 transition"} onClick={() => {setVisibility(true)}}><Pencil /></button>
-                    <button className={"p-4 hover:bg-zinc-700 transition"} onClick={() => {
+                <div className={"w-fit flex  flex-row mr-2"}>
+                    <button className={"p-2 hover:bg-zinc-700 rounded-2xl transition"} onClick={() => {setVisibility(true)}}><Pencil /></button>
+                    <button className={"p-2 hover:bg-zinc-700 rounded-2xl transition"} onClick={() => {
                         onDelete(fav.id)
                     }}><Trash /></button>
                 </div>

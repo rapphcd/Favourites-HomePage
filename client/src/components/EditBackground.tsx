@@ -39,7 +39,7 @@ function EditBackground({ setUpdated } : Props){
                     </div>
                 ) : null
             }
-            <div className={"flex bg-zinc-800 text-zinc-400 absolute right-2 top-2 p-2 rounded-lg cursor-pointer hover:scale-[102%] select-none transition duration-75"}>
+            <div className={"flex bg-zinc-800 text-white absolute right-2 top-2 p-2 rounded-lg border border-zinc-700/80 cursor-pointer hover:scale-[102%] select-none transition duration-75"}>
                 <button className={"cursor-pointer"} onClick={() => {setVisibility(true)}}><Settings2 /></button>
             </div>
         </div>
