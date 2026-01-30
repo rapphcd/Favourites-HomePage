@@ -15,7 +15,7 @@ app.use(cors(corsOpt));
 app.use(bodyParser.json())
 
 app.post("/create", (req, res) => {
-    const link = req.body.link;
+    let link = req.body.link;
     const name = req.body.name;
 
     fs.readFile('./favourites.json', 'utf8', (err, json) => {
@@ -25,6 +25,10 @@ app.post("/create", (req, res) => {
         var id= 0;
         if(favourites.length > 0){
             id = favourites[favourites.length -1].id + 1;
+        }
+
+        if(!(link.startsWith("https://") || link.startsWith("http://"))){
+            link = `https://${link}`
         }
 
         const newDatas = {
