@@ -1,9 +1,12 @@
 import {useEffect, useState} from "react";
-import moment, {type Moment} from "moment/moment";
+import moment, {type Moment} from "moment";
+// @ts-ignore
+import "moment/dist/locale/fr.js";
+
 
 function DateWidget() {
 
-    const [date, setDate] = useState(moment().locale("fr").format("LL"))
+    const [date, setDate] = useState(moment().locale('fr').format("LL"))
 
     useEffect(() => {
         setInterval(() => {

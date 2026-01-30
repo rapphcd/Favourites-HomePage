@@ -1,5 +1,6 @@
 import {useState} from "react";
 import type {Favourite} from "../types/favourite.ts";
+import {CirclePlus} from "lucide-react";
 
 interface Props {
     favourites: Favourite[],
@@ -56,7 +57,7 @@ function AddButton({favourites ,setFavourites = f => f, onCreate} : Props){
             }
             <div className={" flex items-center justify-center"}>
                 <div className={"w-[20%] bg-zinc-900 hover:bg-zinc-950/60 rounded-full flex items-center justify-center overflow-hidden p-2 cursor-default transition select-none"} onClick={()=>{setVisibility(true)}}>
-                    +
+                    <CirclePlus />
                 </div>
             </div>
         </div>

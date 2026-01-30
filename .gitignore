@@ -9,6 +9,5 @@
 /server/package-lock.json
 /server/favourites.json
 /server/background.json
-/server/nodemon.json
 /server/uploaded/background/*
 /server/uploaded/icons/*

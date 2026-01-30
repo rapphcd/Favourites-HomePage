@@ -150,7 +150,30 @@ app.post("/background/upload", fileUpload({ createParentPath: true }) , (req, re
         if(err) return res.status(500)
     })
 
+    let name = file.name.split(".")[0]
+    let type = file.name.split(".")[1]
+
+    const newBg = {
+        name: name,
+        mimetype: file.mimetype,
+        type: type
+    }
+
+    fs.writeFile('./background.json', JSON.stringify(newBg), (err) => {
+        if (err) return res.status(500)
+    })
+
     res.status(200);
+})
+
+app.get("/background/get", (req, res) => {
+    fs.readFile('./background.json', 'utf8', (err, json) => {
+        if (err) return res.status(500);
+        const bg = JSON.parse(json);
+
+        res.type(bg.mimetype)
+        res.sendFile(__dirname+ `/uploaded/background/${bg.name}.${bg.type}`);
+    });
 })
 
 app.listen(8080, () => {

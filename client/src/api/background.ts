@@ -10,8 +10,3 @@ export const editBackground = async (file : File) : Promise<boolean> => {
     });
     return res.status == 200
 }
-
-export const getBackground = async () : Promise<File> => {
-    const res = await axios.get("http://localhost:8080/background/get");
-    return res.data.file
-}
