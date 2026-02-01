@@ -6,4 +6,7 @@ export type MeteoData = {
     city: string,
     country: string,
     icon: string,
+    timestamp: number,
+    lon: number,
+    lat: number
 }

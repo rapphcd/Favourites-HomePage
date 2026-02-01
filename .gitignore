@@ -1,15 +1,21 @@
 /client/package-lock.json
 /client/node_modules
-/client/.env
 /client/dist
+/client/Dockerfile
+/client/.dockerignore
 
 /.idea
+
+/STARTCLIENT.exe
+/STARTSERVER.exe
 
 /server/node_modules
 /server/package-lock.json
 /server/favourites.json
 /server/background.json
+/server/meteo.json
 /server/uploaded/background/*
 /server/uploaded/icons/*
+/server/.env
 
 !/server/uploaded/background/bg.jpg
