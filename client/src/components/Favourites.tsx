@@ -40,7 +40,7 @@ function Favourites() {
 
         setFavourites(newfavs);
 
-        if(storeInHistory){
+        if (storeInHistory) {
             setActionsHistory([...actionsHistory, {
                 type: "delete",
                 datas: datas
@@ -50,17 +50,25 @@ function Favourites() {
 
     function editFav(id: number, newFav: Favourite, storeInHistory: boolean) {
         try {
-            if(storeInHistory){
+            if (storeInHistory) {
                 getFavourite(id).then((previous) => {
                     setActionsHistory([...actionsHistory, {
                         type: "edit",
                         datas: {
+                            id: id,
                             name: previous.name,
                             link: previous.link
                         }
                     }])
                 });
             }
+            const newfavs: Favourite[] = [];
+            for (const fav in favourites) {
+                if (favourites[fav].id != id) {
+                    newfavs.push(favourites[fav]);
+                }
+            }
+            setFavourites([...newfavs, newFav])
             updateFavourite(id, newFav);
         } catch (err) {
             console.log(err);
@@ -72,7 +80,7 @@ function Favourites() {
             createFavourite(toCreate.name, toCreate.link).then((newFav: Favourite) => {
                 setFavourites([...favourites, newFav])
 
-                if(storeInHistory){
+                if (storeInHistory) {
                     const action: Action = {
                         type: "create",
                         datas: {
@@ -87,15 +95,42 @@ function Favourites() {
         }
     }
 
-    function handleUndo() {
+    async function handleUndo() {
         console.log(actionsHistory)
+        if (actionsHistory.length === 0) return;
+
+        const lastAction: Action | undefined = actionsHistory[actionsHistory.length - 1]
+
+        setActionsHistory(actionsHistory.slice(0, -1));
+
+        switch (lastAction?.type) {
+            case "create": {
+                const id: number = lastAction.datas.id;
+                deleteFav(id, false)
+                break;
+            }
+            case "delete": {
+                const name: string = lastAction.datas.name;
+                const link: string = lastAction.datas.link;
+                createFav({name, link}, false);
+                break;
+            }
+            case "edit": {
+                const {id, name, link} = lastAction.datas;
+                const restoredFav = {id, name, link};
+                editFav(id, restoredFav, false);
+                break;
+            }
+            default:
+                return;
+        }
     }
 
     useEffect(() => {
         async function keyHandler(e: globalThis.KeyboardEvent) {
             if (e.ctrlKey && e.key === "z") {
                 e.preventDefault();
-                handleUndo();
+                await handleUndo();
             }
         }
 
