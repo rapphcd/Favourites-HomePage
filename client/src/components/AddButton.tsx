@@ -1,17 +1,14 @@
 import {useState} from "react";
-import type {Favourite} from "../types/favourite.ts";
 import {CirclePlus} from "lucide-react";
 
 interface Props {
-    favourites: Favourite[],
-    setFavourites: (fav: Favourite[]) => void,
     onCreate: (fav : {
         name: string,
         link: string
-    }) => Promise<Favourite>
+    }, storeInHistory: boolean) => void
 }
 
-function AddButton({favourites ,setFavourites = f => f, onCreate} : Props){
+function AddButton({onCreate} : Props){
     const [visibility, setVisibility] = useState(false);
 
     function handleSub(e : any){
@@ -27,17 +24,7 @@ function AddButton({favourites ,setFavourites = f => f, onCreate} : Props){
             link: inputlink.value
         };
 
-
-        const create = async () => {
-            try {
-                await onCreate(toCreate).then((newFav : Favourite) => {
-                    setFavourites([...favourites, newFav])
-                })
-            } catch (err){
-                console.log(err)
-            }
-        };
-        create()
+        onCreate(toCreate, true)
         setVisibility(false)
     }
 

@@ -6,6 +6,11 @@ export const getFavourites = async () : Promise<Favourite[]> => {
     return response.data.favourites;
 }
 
+export const getFavourite = async (id: number) : Promise<Favourite> => {
+    const response = await axios.get(`http://localhost:8080/favourites/${id}`);
+    return response.data.favourite;
+}
+
 export const deleteFavourite = async (id : number) => {
     await axios.delete(`http://localhost:8080/favourites/delete/${id}`);
 }

@@ -127,7 +127,7 @@ module.exports = function(app){
             if (!found) {
                 res.status(404)
             } else {
-                res.json({favourites: toSend});
+                res.json({favourite: toSend});
             }
         });
     });
