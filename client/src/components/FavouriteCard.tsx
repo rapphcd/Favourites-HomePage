@@ -2,6 +2,7 @@ import type {Favourite} from "../types/favourite.ts";
 import {useState} from "react";
 import {Pencil, Trash} from "lucide-react";
 import LinkIcon from "./LinkIcon.tsx";
+import {useEscapeModals} from "../events/keyboardEvents.ts";
 
 interface Props {
     fav: Favourite,
@@ -26,6 +27,8 @@ function FavouriteCard({fav, onEdit = f => f, onDelete = f => f}: Props) {
         onEdit(fav.id, favor, true)
         setVisibility(false)
     }
+
+    useEscapeModals(visibility, setVisibility);
 
     return (
         <div>

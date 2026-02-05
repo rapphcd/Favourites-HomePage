@@ -2,6 +2,7 @@ import {useState, type ChangeEvent, type SetStateAction} from "react";
 import {editBackground} from "../api/background.ts";
 import * as React from "react";
 import {Settings2} from "lucide-react";
+import {useEscapeModals} from "../events/keyboardEvents.ts";
 
 interface Props {
     setUpdated: React.Dispatch<SetStateAction<boolean>>
@@ -25,6 +26,7 @@ function EditBackground({ setUpdated } : Props){
         }
     }
 
+    useEscapeModals(visibility, setVisibility);
 
     return (
         <div>

@@ -95,8 +95,7 @@ function Favourites() {
         }
     }
 
-    async function handleUndo() {
-        console.log(actionsHistory)
+    function handleUndo() {
         if (actionsHistory.length === 0) return;
 
         const lastAction: Action | undefined = actionsHistory[actionsHistory.length - 1]
@@ -127,10 +126,10 @@ function Favourites() {
     }
 
     useEffect(() => {
-        async function keyHandler(e: globalThis.KeyboardEvent) {
+        function keyHandler(e: KeyboardEvent) {
             if (e.ctrlKey && e.key === "z") {
                 e.preventDefault();
-                await handleUndo();
+                handleUndo();
             }
         }
 

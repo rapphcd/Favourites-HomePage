@@ -4,6 +4,7 @@ import Widgets from "./components/Widgets.tsx";
 import DateWidget from "./components/DateWidget.tsx";
 import EditBackground from "./components/EditBackground.tsx";
 import {useEffect, useState} from "react";
+import {useControlS} from "./events/keyboardEvents.ts";
 
 function App() {
     const [updated, setUpdated] = useState(true)
@@ -16,6 +17,8 @@ function App() {
         }
         updateBackground()
     }, [updated]);
+
+    useControlS();
 
   return (
       <main className={`flex flex-col h-full w-full justify-center items-start bg-[url(http://localhost:8080/background/get)] bg-center`}>

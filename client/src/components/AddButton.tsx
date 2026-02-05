@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {CirclePlus} from "lucide-react";
+import {useEscapeModals} from "../events/keyboardEvents.ts";
 
 interface Props {
     onCreate: (fav : {
@@ -27,6 +28,8 @@ function AddButton({onCreate} : Props){
         onCreate(toCreate, true)
         setVisibility(false)
     }
+
+    useEscapeModals(visibility, setVisibility);
 
     return (
         <div>
