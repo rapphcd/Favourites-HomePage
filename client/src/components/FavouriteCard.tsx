@@ -3,6 +3,7 @@ import {useState} from "react";
 import {Pencil, Trash} from "lucide-react";
 import LinkIcon from "./LinkIcon.tsx";
 import {useEscapeModals} from "../events/keyboardEvents.ts";
+import {createPortal} from "react-dom";
 
 interface Props {
     fav: Favourite,
@@ -33,40 +34,42 @@ function FavouriteCard({fav, onEdit = f => f, onDelete = f => f}: Props) {
     return (
         <div>
             {
+
                 visibility ? (
-                    <div className={"w-full h-full absolute flex justify-center items-center top-0 left-0"}>
+                    createPortal(
+                        <div className={"w-full h-full absolute flex justify-center items-center top-0 left-0"}>
                         <div
-                            className={"bg-black/30 w-full h-full absolute flex justify-center items-center top-0 left-0"}
+                            className={"bg-black/30 backdrop-blur-[2px] w-full h-full absolute flex justify-center items-center top-0 left-0"}
                             onClick={() => setVisibility(false)}></div>
                         <form id={"editFav"} onSubmit={handleSub}
-                              className={"flex flex-col justify-around items-center transition ease-in-out animate-modalopen size-[32%] bg-zinc-800 rounded-4xl z-10 border border-zinc-700/80"}>
+                              className={"flex flex-col justify-around items-center transition ease-in-out animate-modalopen size-[32%] backdrop-blur-xl bg-white/10 rounded-4xl z-10 border border-white/10"}>
                             <input type="hidden" name="id" value={fav.id}/>
                             <div className={"w-full flex flex-col justify-center items-center mt-2"}>
                                 <label className={"mb-2 text-lg"}>Nom</label>
                                 <input type="text" name="inputname" id="inputname"
-                                       className={"bg-zinc-900 p-2 w-[90%] rounded-2xl focus:border-none focus:outline-1 focus:outline-white/50"}
+                                       className={"backdrop-blur-xl p-2 w-[90%] rounded-xl focus:border-none focus:outline-1 focus:outline-white/50"}
                                        autoComplete={"off"} required={true} defaultValue={fav.name}/>
                             </div>
                             <div className={"w-full flex flex-col justify-center items-center"}>
                                 <label className={"mb-2 text-lg"}>Lien</label>
                                 <input type="text" name="inputlink" id="inputlink"
-                                       className={"bg-zinc-900 p-2 w-[90%] rounded-2xl focus:border-none focus:outline-1 focus:outline-white/50"}
+                                       className={"backdrop-blur-xl p-2 w-[90%] rounded-xl focus:border-none focus:outline-1 focus:outline-white/50"}
                                        autoComplete={"off"} required={true} defaultValue={fav.link}/>
                             </div>
-                            <button type="submit" className={"p-3 hover:bg-zinc-900/70 rounded-2xl text-xl"}>Confirm</button>
+                            <button type="submit" className={"p-3 hover:backdrop-blur-xl rounded-2xl text-xl"}>Confirm</button>
                         </form>
-                    </div>
+                    </div>, document.body)
                 ) : null
             }
             <div key={fav.id}
-                 className={"bg-zinc-900 transition rounded-xl hover:bg-zinc-950/60 flex items-center justify-between overflow-hidden duration-100"}>
+                 className={"backdrop-blur-lg rounded-xl hover:bg-zinc-400/10 flex items-center justify-between overflow-hidden transition-none"}>
                 <LinkIcon link={fav.link}></LinkIcon>
                 <a href={fav.link} className={"py-4 w-[85%] cursor-default"}>{fav.name}</a>
                 <div className={"w-fit flex  flex-row mr-2"}>
-                    <button className={"p-2 hover:bg-zinc-700 rounded-2xl transition"} onClick={() => {
+                    <button className={"p-2 hover:backdrop-blur-xl rounded-2xl transition-none"} onClick={() => {
                         setVisibility(true)
                     }}><Pencil/></button>
-                    <button className={"p-2 hover:bg-zinc-700 rounded-2xl transition"} onClick={() => {
+                    <button className={"p-2 hover:backdrop-blur-xl rounded-2xl transition-none"} onClick={() => {
                         onDelete(fav.id, true)
                     }}><Trash/></button>
                 </div>

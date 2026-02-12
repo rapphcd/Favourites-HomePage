@@ -19,7 +19,7 @@ function DateWidget() {
     return (
         <div className={"flex flex-col items-center w-full"}>
             <div
-                className={"flex items-center justify-center w-max text-3xl mt-3 bg-zinc-800 px-5 py-2 rounded-2xl border border-zinc-700/80 cursor-default hover:scale-[100.5%] select-none transition duration-75"}>
+                className={"flex items-center justify-center w-max text-3xl mt-3 backdrop-blur-md px-5 py-2 rounded-2xl border border-white/10 cursor-default hover:scale-[100.5%] select-none transition duration-75"}>
                 {date}
             </div>
         </div>
