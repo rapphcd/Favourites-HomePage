@@ -142,16 +142,16 @@ function Favourites() {
 
     return (
         <div
-            className={"flex flex-col w-[40%] h-full max-h-[95%] justify-around backdrop-blur-lg bg-white/5 border border-white/10 items-center rounded-2xl mx-4 transition duration-75 overflow-y-scroll scroll [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"}>
+            className={"flex flex-col w-[40%] h-full max-h-[95%] justify-around backdrop-blur-lg bg-white/5 border border-white/10 items-center rounded-2xl mx-4 transition duration-75 overflow-y-scroll scroll [scrollbar-width:none] [&::-webkit-scrollbar]:hidden mb-2"}>
             <div className={"flex flex-col justify-around w-full h-full p-2 gap-2"}>
-                <div className={"flex flex-col justify-start h-full gap-2"}>
+                <div className={"flex flex-col justify-start h-full gap-2 "}>
                     {
                         favourites.map((fav: Favourite) => (
                             <FavouriteCard key={fav.id} fav={fav} onEdit={editFav} onDelete={deleteFav}></FavouriteCard>
                         ))
                     }
+                    <AddButton onCreate={createFav}></AddButton>
                 </div>
-                <AddButton onCreate={createFav}></AddButton>
             </div>
         </div>
     )

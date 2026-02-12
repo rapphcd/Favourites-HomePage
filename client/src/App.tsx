@@ -27,7 +27,7 @@ function App() {
                   <DateWidget></DateWidget>
                   <EditBackground setUpdated={setUpdated}></EditBackground>
               </div>
-              <div className={"flex flex-row w-full h-full items-center justify-start"}>
+              <div className={"flex flex-row w-full h-full max-h-[90%] items-center justify-start"}>
                   <Favourites></Favourites>
                   <Widgets></Widgets>
               </div>
