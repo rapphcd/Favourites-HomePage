@@ -56,7 +56,7 @@ function MeteoWidget() {
 
     return (
         <div
-            className={" flex flex-col items-center backdrop-blur-md p-5 rounded-2xl border border-white/10 text-xl cursor-default hover:scale-[100.5%] select-none transition duration-75"}>
+            className={" flex flex-col items-center backdrop-blur-md bg-white/5 p-5 rounded-2xl border border-white/10 text-xl cursor-default hover:scale-[100.5%] select-none transition duration-75"}>
             <div className={"flex flex-row"}>
                 <div className={"flex flex-col"}>
                     <p className={`${getTempColor(Number(meteo?.temp))} text-4xl`}>

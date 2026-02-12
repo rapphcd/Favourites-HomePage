@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {CirclePlus} from "lucide-react";
 import {useEscapeModals} from "../events/keyboardEvents.ts";
-import {createPortal} from "react-dom";
+import Modal from "./Modal.tsx";
 
 interface Props {
     onCreate: (fav: {
@@ -36,10 +36,7 @@ function AddButton({onCreate}: Props) {
         <div>
             {
                 visibility ? (
-                    createPortal(<div className={"w-full h-full absolute flex justify-center items-center top-0 left-0"}>
-                        <div
-                            className={"bg-black/20 backdrop-blur-[2px] w-full h-full absolute flex justify-center items-center top-0 left-0"}
-                            onClick={() => setVisibility(false)}></div>
+                    <Modal setVisibility={setVisibility}>
                         <form id={"editFav"} onSubmit={handleSub}
                               className={"flex flex-col justify-around items-center transition ease-in-out animate-modalopen size-[32%] backdrop-blur-xl bg-white/10 rounded-4xl z-10 border border-white/10"}>
                             <div className={"w-full flex flex-col justify-center items-center mt-2"}>
@@ -56,9 +53,10 @@ function AddButton({onCreate}: Props) {
                                        autoComplete={"off"} name="inputlink" id="inputlink" required={true}
                                        defaultValue={""}/>
                             </div>
-                            <button type="submit" className={"p-3 hover:backdrop-blur-xl rounded-2xl text-xl"}>Confirm</button>
+                            <button type="submit" className={"p-3 hover:backdrop-blur-xl rounded-2xl text-xl"}>Confirm
+                            </button>
                         </form>
-                    </div>, document.body)
+                    </Modal>
                 ) : null
             }
             <div className={" flex items-center justify-center"}>

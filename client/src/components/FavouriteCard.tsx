@@ -3,7 +3,7 @@ import {useState} from "react";
 import {Pencil, Trash} from "lucide-react";
 import LinkIcon from "./LinkIcon.tsx";
 import {useEscapeModals} from "../events/keyboardEvents.ts";
-import {createPortal} from "react-dom";
+import Modal from "./Modal.tsx";
 
 interface Props {
     fav: Favourite,
@@ -36,29 +36,25 @@ function FavouriteCard({fav, onEdit = f => f, onDelete = f => f}: Props) {
             {
 
                 visibility ? (
-                    createPortal(
-                        <div className={"w-full h-full absolute flex justify-center items-center top-0 left-0"}>
-                        <div
-                            className={"bg-black/30 backdrop-blur-[2px] w-full h-full absolute flex justify-center items-center top-0 left-0"}
-                            onClick={() => setVisibility(false)}></div>
-                        <form id={"editFav"} onSubmit={handleSub}
-                              className={"flex flex-col justify-around items-center transition ease-in-out animate-modalopen size-[32%] backdrop-blur-xl bg-white/10 rounded-4xl z-10 border border-white/10"}>
-                            <input type="hidden" name="id" value={fav.id}/>
-                            <div className={"w-full flex flex-col justify-center items-center mt-2"}>
-                                <label className={"mb-2 text-lg"}>Nom</label>
-                                <input type="text" name="inputname" id="inputname"
-                                       className={"backdrop-blur-xl p-2 w-[90%] rounded-xl focus:border-none focus:outline-1 focus:outline-white/50"}
-                                       autoComplete={"off"} required={true} defaultValue={fav.name}/>
-                            </div>
-                            <div className={"w-full flex flex-col justify-center items-center"}>
-                                <label className={"mb-2 text-lg"}>Lien</label>
-                                <input type="text" name="inputlink" id="inputlink"
-                                       className={"backdrop-blur-xl p-2 w-[90%] rounded-xl focus:border-none focus:outline-1 focus:outline-white/50"}
-                                       autoComplete={"off"} required={true} defaultValue={fav.link}/>
-                            </div>
-                            <button type="submit" className={"p-3 hover:backdrop-blur-xl rounded-2xl text-xl"}>Confirm</button>
-                        </form>
-                    </div>, document.body)
+                        <Modal setVisibility={setVisibility}>
+                            <form id={"editFav"} onSubmit={handleSub}
+                                  className={"flex flex-col justify-around items-center transition ease-in-out animate-modalopen size-[32%] backdrop-blur-xl bg-white/10 rounded-4xl z-10 border border-white/10"}>
+                                <input type="hidden" name="id" value={fav.id}/>
+                                <div className={"w-full flex flex-col justify-center items-center mt-2"}>
+                                    <label className={"mb-2 text-lg"}>Nom</label>
+                                    <input type="text" name="inputname" id="inputname"
+                                           className={"backdrop-blur-xl p-2 w-[90%] rounded-xl focus:border-none focus:outline-1 focus:outline-white/50"}
+                                           autoComplete={"off"} required={true} defaultValue={fav.name}/>
+                                </div>
+                                <div className={"w-full flex flex-col justify-center items-center"}>
+                                    <label className={"mb-2 text-lg"}>Lien</label>
+                                    <input type="text" name="inputlink" id="inputlink"
+                                           className={"backdrop-blur-xl p-2 w-[90%] rounded-xl focus:border-none focus:outline-1 focus:outline-white/50"}
+                                           autoComplete={"off"} required={true} defaultValue={fav.link}/>
+                                </div>
+                                <button type="submit" className={"p-3 hover:backdrop-blur-xl rounded-2xl text-xl"}>Confirm</button>
+                            </form>
+                        </Modal>
                 ) : null
             }
             <div key={fav.id}
