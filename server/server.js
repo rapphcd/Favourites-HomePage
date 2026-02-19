@@ -10,9 +10,9 @@ const corsOpt = {
 const app = express();
 
 app.use(cors(corsOpt));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
-require("./routes/favourites.js")(app)
+require("./routes/favourites.js")(app, __dirname)
 require("./routes/background.js")(app, __dirname)
 require("./routes/meteo")(app)
 

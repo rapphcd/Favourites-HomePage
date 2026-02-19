@@ -1,6 +1,8 @@
 const fs = require("fs");
+const fileUpload = require("express-fileupload");
+const path = require("path");
 
-module.exports = function(app){
+module.exports = function(app, dirpath){
 
     app.post("/favourites/create", (req, res) => {
         let link = req.body.link;
@@ -12,8 +14,13 @@ module.exports = function(app){
 
             var id = 0;
             if (favourites.length > 0) {
-                id = favourites[favourites.length - 1].id + 1;
+                for(const fav of favourites){
+                    if(fav.id > id){
+                        id = fav.id
+                    }
+                }
             }
+            id+=1
 
             if (!(link.startsWith("https://") || link.startsWith("http://"))) {
                 link = `https://${link}`
@@ -105,6 +112,25 @@ module.exports = function(app){
             res.json({favourites: favourites});
         });
     });
+
+    app.get("/favourites/export", (req, res) => {
+        res.download(dirpath + "/favourites.json", (err) => {
+            if(err) console.log(err);
+        })
+    });
+
+    app.post("/favourites/import", fileUpload({createParentPath: true}), (req, res) => {
+        if (!req.files) return res.status(500);
+        const file = req.files.file
+        const fpath = path.join(dirpath, "favourites.json")
+
+        file.mv(fpath, (err) => {
+            if (err) console.log(err)
+            return res.status(500)
+        })
+
+        res.status(200);
+    })
 
     app.get("/favourites/:id", (req, res) => {
         const id = req.params.id;

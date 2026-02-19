@@ -29,3 +29,21 @@ export const updateFavourite = async (id: number, updated : Favourite) => {
     });
 }
 
+export const getExportedFavourites = async () => {
+    const res = await axios.get("http://localhost:8080/favourites/export", {
+        responseType: 'blob'
+    })
+    return res;
+}
+
+
+export const importFavourites = async (file: File) => {
+    const data = new FormData();
+    data.append('file', file);
+    const res = await axios.post("http://localhost:8080/favourites/import", data, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    });
+    return res.status
+}

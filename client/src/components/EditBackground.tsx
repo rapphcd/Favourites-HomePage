@@ -1,4 +1,4 @@
-import {useState, type ChangeEvent, type SetStateAction} from "react";
+import {useState, type ChangeEvent, type SetStateAction, type FormEvent} from "react";
 import {editBackground} from "../api/background.ts";
 import * as React from "react";
 import {Settings2} from "lucide-react";
@@ -13,7 +13,7 @@ function EditBackground({ setUpdated } : Props){
     const [visibility, setVisibility] = useState<boolean>(false);
     const [file, setFile] = useState<File | null>(null);
 
-    const handleSub = async (e: any)=> {
+    const handleSub = async (e : FormEvent)=> {
         e.preventDefault()
         if(!file) return;
         setVisibility(false)
@@ -44,7 +44,7 @@ function EditBackground({ setUpdated } : Props){
                         </Modal>
                 ) : null
             }
-            <button className={"backdrop-blur-lg bg-white/5 text-white absolute right-2 top-2 p-2 rounded-lg border border-white/10 cursor-pointer hover:scale-[102%] hover:backdrop-blur-md select-none transition duration-75"} onClick={() => {setVisibility(true)}}><Settings2 /></button>
+            <button className={"backdrop-blur-lg bg-white/5 text-white p-2 rounded-lg border border-white/10 cursor-pointer hover:scale-[102%] hover:backdrop-blur-md select-none transition duration-75"} onClick={() => {setVisibility(true)}}><Settings2 /></button>
         </div>
     )
 }

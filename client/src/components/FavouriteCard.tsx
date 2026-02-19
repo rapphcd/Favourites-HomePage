@@ -60,7 +60,7 @@ function FavouriteCard({fav, onEdit = f => f, onDelete = f => f}: Props) {
             <div key={fav.id}
                  className={"backdrop-blur-lg rounded-xl hover:bg-zinc-400/10 flex items-center justify-between overflow-hidden transition-none"}>
                 <LinkIcon link={fav.link}></LinkIcon>
-                <a href={fav.link} className={"py-4 w-[85%] cursor-default"}>{fav.name}</a>
+                <a href={fav.link} className={"py-4 w-[85%] cursor-defaultc text-nowrap overflow-hidden text-ellipsis whitespace-nowrap"}>{fav.name}</a>
                 <div className={"w-fit flex  flex-row mr-2"}>
                     <button className={"p-2 hover:backdrop-blur-xl rounded-2xl transition-none"} onClick={() => {
                         setVisibility(true)
