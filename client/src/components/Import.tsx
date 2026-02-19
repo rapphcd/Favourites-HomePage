@@ -40,8 +40,8 @@ function ImportFavourites({ setUpdated } : Props) {
                     <Modal setVisibility={setVisibility}>
                         <form id={"editBackground"} onSubmit={handleSub} className={"flex flex-col justify-around items-center transition ease-in-out animate-modalopen size-[25%] backdrop-blur-xl bg-white/10 rounded-4xl z-10 border border-white/10"}>
                             <div className={"w-full flex flex-col justify-center items-center mt-2"}>
-                                <label className={"mb-2 text-lg"}>Arrière-plan</label>
-                                <input onInput={changeHandler} type="file" accept={"application/json"} name="background" id="background" className={"backdrop-blur-xl p-2 w-[90%] cursor-pointer rounded-2xl focus:border-none focus:outline-1 focus:outline-white/50"} autoComplete={"off"} required={true} />
+                                <label className={"mb-2 text-lg"}>Importer des favoris</label>
+                                <input onInput={changeHandler} type="file" accept={"application/json"} name="import" id="import" className={"backdrop-blur-xl p-2 w-[90%] cursor-pointer rounded-2xl focus:border-none focus:outline-1 focus:outline-white/50"} autoComplete={"off"} required={true} />
                             </div>
                             <button type="submit" className={"p-3 hover:bg-white/5 rounded-2xl text-xl"}>Confirm</button>
                         </form>
