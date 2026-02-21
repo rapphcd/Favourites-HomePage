@@ -1,4 +1,4 @@
-import {useState, type ChangeEvent, type SetStateAction, type FormEvent} from "react";
+import {useState, type SetStateAction} from "react";
 import {editBackground} from "../api/background.ts";
 import * as React from "react";
 import {Settings2} from "lucide-react";
@@ -13,7 +13,7 @@ function EditBackground({ setUpdated } : Props){
     const [visibility, setVisibility] = useState<boolean>(false);
     const [file, setFile] = useState<File | null>(null);
 
-    const handleSub = async (e : FormEvent)=> {
+    const handleSub = async (e : any)=> {
         e.preventDefault()
         if(!file) return;
         setVisibility(false)
@@ -21,7 +21,7 @@ function EditBackground({ setUpdated } : Props){
         await editBackground(file)
     }
 
-    const changeHandler = (e : ChangeEvent<HTMLInputElement>) => {
+    const changeHandler = (e : any) => {
         if(e.currentTarget.files){
             setFile(e.currentTarget.files[0])
         }

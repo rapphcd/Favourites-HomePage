@@ -23,8 +23,8 @@ export const createFavourite = async (name: string, link : string) : Promise<Fav
     return res.data
 }
 
-export const updateFavourite = async (id: number, updated : Favourite) => {
-    await axios.put(`http://localhost:8080/favourites/update/${id}`, {
+export const updateFavourites = async (updated : Favourite[]) => {
+    await axios.put(`http://localhost:8080/favourites/update/`, {
         updated: updated,
     });
 }
