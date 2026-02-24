@@ -16,7 +16,7 @@ function AddButton({onCreate}: Props) {
     function handleSub(e: any) {
         e.preventDefault();
 
-        const {inputname, inputlink} = e.target.elements
+        const {inputname, inputlink} = e.target.elements;
 
         if (inputname.value == "" || inputlink.value == "") {
             return;
@@ -26,8 +26,8 @@ function AddButton({onCreate}: Props) {
             link: inputlink.value
         };
 
-        onCreate(toCreate, true)
-        setVisibility(false)
+        onCreate(toCreate, true);
+        setVisibility(false);
     }
 
     useEscapeModals(visibility, setVisibility);
@@ -63,7 +63,7 @@ function AddButton({onCreate}: Props) {
                 <div
                     className={"w-[20%] bg-zinc-900/20 hover:bg-zinc-900/30 rounded-full flex items-center justify-center overflow-hidden p-2 cursor-default transition select-none"}
                     onClick={() => {
-                        setVisibility(true)
+                        setVisibility(true);
                     }}>
                     <CirclePlus/>
                 </div>

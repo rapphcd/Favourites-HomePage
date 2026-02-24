@@ -37,7 +37,7 @@ function Favourites() {
                 const data: Favourite[] = await getFavourites();
                 setFavourites(data);
             } catch (error) {
-                console.log(error)
+                console.log(error);
             }
         }
         fetchFavourites();
@@ -48,13 +48,13 @@ function Favourites() {
         const datas = {
             name: "",
             link: ""
-        }
+        };
         for (const fav in favourites) {
             if (favourites[fav].id != id) {
                 newfavs.push(favourites[fav]);
             } else {
-                datas.name = favourites[fav].name
-                datas.link = favourites[fav].link
+                datas.name = favourites[fav].name;
+                datas.link = favourites[fav].link;
             }
         }
 
@@ -66,7 +66,7 @@ function Favourites() {
             setActionsHistory([...actionsHistory, {
                 type: "delete",
                 datas: datas
-            }])
+            }]);
         }
     }
 
@@ -82,14 +82,14 @@ function Favourites() {
                             link: previous.link,
                             position: previous.position
                         }
-                    }])
+                    }]);
                 });
             }
 
             let oldFav;
             for (const fav of favourites) {
                 if (fav.id === id) {
-                    oldFav = fav
+                    oldFav = fav;
                 }
             }
             const newfavs: Favourite[] = [];
@@ -98,23 +98,20 @@ function Favourites() {
                     if (oldFav != null && oldFav.position != newFav.position) {
                         if(newFav.position >= oldFav.position){
                             if (fav.position <= newFav.position && fav.position > oldFav.position) {
-                                fav.position -= 1
+                                fav.position -= 1;
                             }
-                            console.log("a", fav.name, fav.position)
                         } else {
                             if (fav.position >= newFav.position && fav.position < oldFav.position) {
-                                fav.position += 1
+                                fav.position += 1;
                             }
-                            console.log("b", fav.name, fav.position)
                         }
                     }
-                    newfavs.push(fav)
+                    newfavs.push(fav);
                 }
             }
 
-            newfavs.push(newFav)
-            console.log(newfavs)
-            setFavourites(newfavs)
+            newfavs.push(newFav);
+            setFavourites(newfavs);
             updateFavourites(newfavs);
         } catch (err) {
             console.log(err);
@@ -124,7 +121,7 @@ function Favourites() {
     function createFav(toCreate: { name: string, link: string }, storeInHistory: boolean) {
         try {
             createFavourite(toCreate.name, toCreate.link).then((newFav: Favourite) => {
-                setFavourites([...favourites, newFav])
+                setFavourites([...favourites, newFav]);
 
                 if (storeInHistory) {
                     const action: Action = {
@@ -132,26 +129,26 @@ function Favourites() {
                         datas: {
                             id: newFav.id
                         }
-                    }
-                    setActionsHistory([...actionsHistory, action])
+                    };
+                    setActionsHistory([...actionsHistory, action]);
                 }
-            })
+            });
         } catch (err) {
-            console.log(err)
+            console.log(err);
         }
     }
 
     function handleUndo() {
         if (actionsHistory.length === 0) return;
 
-        const lastAction: Action | undefined = actionsHistory[actionsHistory.length - 1]
+        const lastAction: Action | undefined = actionsHistory[actionsHistory.length - 1];
 
         setActionsHistory(actionsHistory.slice(0, -1));
 
         switch (lastAction?.type) {
             case "create": {
                 const id: number = lastAction.datas.id;
-                deleteFav(id, false)
+                deleteFav(id, false);
                 break;
             }
             case "delete": {
@@ -182,7 +179,7 @@ function Favourites() {
         document.addEventListener("keydown", keyHandler);
 
         return () => {
-            document.removeEventListener("keydown", keyHandler)
+            document.removeEventListener("keydown", keyHandler);
         }
     }, [actionsHistory]);
 
@@ -193,7 +190,7 @@ function Favourites() {
             link: source.data.link,
             name: source.data.name,
             position: source.index+1
-        }
+        };
         editFav(source.id, newFav, true);
     }
 

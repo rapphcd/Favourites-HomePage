@@ -20,7 +20,7 @@ export const createFavourite = async (name: string, link : string) : Promise<Fav
         link: link,
         name: name,
     });
-    return res.data
+    return res.data;
 }
 
 export const updateFavourites = async (updated : Favourite[]) => {
@@ -45,5 +45,5 @@ export const importFavourites = async (file: File) => {
             "Content-Type": "multipart/form-data"
         }
     });
-    return res.status
+    return res.status;
 }

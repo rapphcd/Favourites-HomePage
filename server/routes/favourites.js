@@ -8,7 +8,7 @@ module.exports = function (app, dirpath) {
         let link = req.body.link;
         const name = req.body.name;
 
-        fs.readFile('./favourites.json', 'utf8', (err, json) => {
+        fs.readFile("./favourites.json", "utf8", (err, json) => {
             if (err) throw err;
             try {
                 let favourites = JSON.parse(json);
@@ -33,15 +33,15 @@ module.exports = function (app, dirpath) {
                 }
 
                 const newDatas = {
-                    'id': id,
-                    'link': link,
-                    'name': name,
-                    'position': pos
+                    "id": id,
+                    "link": link,
+                    "name": name,
+                    "position": pos
                 }
                 favourites.push(newDatas)
 
                 let code = 200
-                fs.writeFile('./favourites.json', JSON.stringify(favourites), (err) => {
+                fs.writeFile("./favourites.json", JSON.stringify(favourites), (err) => {
                     if (err) {
                         code = 500
                     }
@@ -54,10 +54,10 @@ module.exports = function (app, dirpath) {
         });
     });
 
-    app.put('/favourites/update/', (req, res) => {
+    app.put("/favourites/update/", (req, res) => {
         const updated = req.body.updated;
         let code = 200
-        fs.writeFile('./favourites.json', JSON.stringify(updated), (err) => {
+        fs.writeFile("./favourites.json", JSON.stringify(updated), (err) => {
             if (err) {
                 code = 500;
             }
@@ -69,7 +69,7 @@ module.exports = function (app, dirpath) {
     app.delete("/favourites/delete/:id", (req, res) => {
         const id = req.params.id;
 
-        fs.readFile('./favourites.json', 'utf8', (err, json) => {
+        fs.readFile("./favourites.json", "utf8", (err, json) => {
             if (err) throw err;
             try {
                 let favourites = JSON.parse(json);
@@ -83,7 +83,7 @@ module.exports = function (app, dirpath) {
                 }
 
                 let code = 200
-                fs.writeFile('./favourites.json', JSON.stringify(newDatas), (err) => {
+                fs.writeFile("./favourites.json", JSON.stringify(newDatas), (err) => {
                     if (err) {
                         code = 500;
                     }
@@ -97,7 +97,7 @@ module.exports = function (app, dirpath) {
     });
 
     app.get("/favourites", (req, res) => {
-        fs.readFile('./favourites.json', 'utf8', (err, json) => {
+        fs.readFile("./favourites.json", "utf8", (err, json) => {
             if (err) throw err;
             try {
                 let favourites = JSON.parse(json);
@@ -130,23 +130,23 @@ module.exports = function (app, dirpath) {
     app.get("/favourites/:id", (req, res) => {
         const id = req.params.id;
 
-        fs.readFile('./favourites.json', 'utf8', (err, json) => {
+        fs.readFile("./favourites.json", "utf8", (err, json) => {
             if (err) return res.status(500);
             try {
                 const favourites = JSON.parse(json);
 
                 let toSend = "";
-                let found = false;
+                let isFound = false;
 
                 for (const favIndex in favourites) {
                     if (favourites[favIndex].id === parseInt(id)) {
                         toSend = favourites[favIndex];
-                        found = true;
+                        isFound = true;
                         break;
                     }
                 }
 
-                if (!found) {
+                if (!isFound) {
                     res.status(404)
                 } else {
                     res.json({favourite: toSend});

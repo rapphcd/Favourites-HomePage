@@ -1,4 +1,4 @@
-import {type ChangeEvent, type FormEvent, type SetStateAction, useState} from "react";
+import {type SetStateAction, useState} from "react";
 import { Import } from 'lucide-react';
 import Modal from "./Modal.tsx";
 import {useEscapeModals} from "../events/keyboardEvents.ts";
@@ -13,21 +13,21 @@ function ImportFavourites({ setUpdated } : Props) {
     const [visibility, setVisibility] = useState(false);
     const [file, setFile] = useState<File | null>(null);
 
-    const handleSub = async (e: FormEvent)=> {
-        e.preventDefault()
+    const handleSub = async (e : any)=> {
+        e.preventDefault();
         if(!file) return;
-        setVisibility(false)
-        setUpdated(false)
-        await importFavourites(file)
+        setVisibility(false);
+        setUpdated(false);
+        await importFavourites(file);
     }
 
-    const changeHandler = (e : ChangeEvent<HTMLInputElement>) => {
+    const changeHandler = (e : any) => {
         if(e.currentTarget.files){
             if(e.currentTarget.files[0].type != 'application/json'){
                 e.preventDefault();
                 return;
             }
-            setFile(e.currentTarget.files[0])
+            setFile(e.currentTarget.files[0]);
         }
     }
 

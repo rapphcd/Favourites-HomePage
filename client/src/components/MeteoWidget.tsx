@@ -24,8 +24,8 @@ function MeteoWidget() {
             setLongitude(position.coords.longitude)
             setLatitude(position.coords.latitude)
         }
-        navigator.geolocation.getCurrentPosition(success, () => {
-            console.log('error')
+        navigator.geolocation.getCurrentPosition(success, (e) => {
+            console.log(e)
         })
         const showMeteo = async () => {
             try {

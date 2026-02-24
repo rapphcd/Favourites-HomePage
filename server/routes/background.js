@@ -1,6 +1,6 @@
 const fs = require("fs");
 const fileUpload = require("express-fileupload")
-const path = require('path');
+const path = require("path");
 
 module.exports = function(app, dirpath){
 
@@ -8,7 +8,7 @@ module.exports = function(app, dirpath){
         if (!req.files) return res.status(500);
         const file = req.files.file
 
-        const fpath = path.join(dirpath, 'uploaded', 'background', file.name)
+        const fpath = path.join(dirpath, "uploaded", "background", file.name)
 
         file.mv(fpath, (err) => {
             if (err) return res.status(500)
@@ -23,7 +23,7 @@ module.exports = function(app, dirpath){
             type: type
         }
 
-        fs.writeFile('./background.json', JSON.stringify(newBg), (err) => {
+        fs.writeFile("./background.json", JSON.stringify(newBg), (err) => {
             if (err) return res.status(500)
         })
 
@@ -31,7 +31,7 @@ module.exports = function(app, dirpath){
     })
 
     app.get("/background/get", (req, res) => {
-        fs.readFile('./background.json', 'utf8', (err, json) => {
+        fs.readFile("./background.json", "utf8", (err, json) => {
             if (err) return res.status(500);
             const bg = JSON.parse(json);
 

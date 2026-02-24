@@ -17,16 +17,16 @@ module.exports = function(app){
 
             const currentTimestamp = Date.now();
 
-            let newMeteo = []
+            let newMeteo = [];
             let isCached = false;
             let cachedMeteo = null;
 
             for (let meteo in meteos) {
                 if (currentTimestamp - meteos[meteo].timestamp <= 7200000) {
-                    newMeteo.push(meteos[meteo])
+                    newMeteo.push(meteos[meteo]);
                     if (meteos[meteo].lon === lon && meteos[meteo].lat === lat) {
                         isCached = true;
-                        cachedMeteo = meteos[meteo]
+                        cachedMeteo = meteos[meteo];
                         break;
                     }
                 }
@@ -65,7 +65,7 @@ module.exports = function(app){
                         timestamp: Date.now(),
                         lon: lon,
                         lat: lat
-                    }
+                    };
 
                     newMeteo.push(meteoToCache);
 

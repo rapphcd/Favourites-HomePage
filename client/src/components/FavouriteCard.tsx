@@ -16,7 +16,7 @@ function FavouriteCard({fav, onEdit = f => f, onDelete = f => f}: Props) {
 
     async function handleSub(e: any) {
         e.preventDefault();
-        const {inputname, inputlink, inputpos} = e.target.elements
+        const {inputname, inputlink, inputpos} = e.target.elements;
         if (inputname.value == "" || inputlink.value == "" || inputpos.value == "") {
             return;
         }
@@ -26,8 +26,8 @@ function FavouriteCard({fav, onEdit = f => f, onDelete = f => f}: Props) {
             link: inputlink.value,
             position: parseInt(inputpos.value)
         };
-        onEdit(fav.id, favor, true)
-        setVisibility(false)
+        onEdit(fav.id, favor, true);
+        setVisibility(false);
     }
 
     useEscapeModals(visibility, setVisibility);
@@ -70,10 +70,10 @@ function FavouriteCard({fav, onEdit = f => f, onDelete = f => f}: Props) {
                 <a href={fav.link} className={"py-4 w-[85%] cursor-default text-nowrap overflow-hidden text-ellipsis whitespace-nowrap"}>{fav.name}</a>
                 <div className={"w-fit flex  flex-row mr-2"}>
                     <button className={"p-2 hover:backdrop-blur-xl rounded-2xl transition-none"} onClick={() => {
-                        setVisibility(true)
+                        setVisibility(true);
                     }}><Pencil/></button>
                     <button className={"p-2 hover:backdrop-blur-xl rounded-2xl transition-none"} onClick={() => {
-                        onDelete(fav.id, true)
+                        onDelete(fav.id, true);
                     }}><Trash/></button>
                 </div>
             </div>
